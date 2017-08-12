@@ -1,0 +1,89 @@
+[user]
+	email = YOUR-EMAIL-HERE
+	name = YOUR-NAME-HERE
+[credential]
+	helper = osxkeychain
+[core]
+	editor = atom
+	autocrlf = input
+[alias]
+    # http://haacked.com/archive/2014/07/28/github-flow-aliases/
+	cd = checkout
+	ec = config --global -e
+	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+	cob = checkout -b
+	cm = !git add -A && git commit -m
+	save = !git add -A && git commit -m 'SAVEPOINT'
+	wip = !git add -u && git commit -m "WIP" 
+	undo = reset HEAD~1 --mixed
+	amend = commit -a --amend
+	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+	bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+	bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+
+	s = status
+	a = !git add . && git status
+	au = !git add -u . && git status
+	aa = !git add . && git add -u . && git status
+	c = commit
+	ca = commit --amend # careful
+	ac = !git add . && git commit
+	acm = !git add . && git commit -m
+	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	ll = log --stat --abbrev-commit
+	lg = log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	llg = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
+	d = diff
+	master = checkout master
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+
+	cdd = checkout develop
+	cdm = checkout master
+	del = branch -d
+	delete = branch -d
+	del-server = !git push origin --delete $@
+	ls = branch
+	ls-tag = describe --tags
+	prune = fetch --prune
+	p = pull
+	f = fetch
+	fp = !git fetch && git pull
+	undo = reset --hard origin/develop
+
+	feature = !git checkout -b $@ && git branch --set-upstream-to=origin/feature/$@ feature/$@
+
+	feature-start = !git flow feature start -F $@ && git flow feature publish
+	feature-end = flow feature finish -FDS
+	feature-end-keep = flow feature finish -Frk
+	feature-publish = flow feature publish
+	feature-rebase = flow feature rebase
+
+	release-start = !git flow release start -F $@ && git flow release publish
+	release-publish = flow release publish
+	release-rebase = flow release rebase
+	release-end = flow release finish -Fpn
+	release-end-keep = flow release finish -Frk
+
+	hotfix-start = !git flow hotfix start -F $1 && git flow hotfix publish
+	hotfix-tag-start = !git checkout tags/v$1 -b v$1 && git flow hotfix start -F $1 v$1 && git flow hotfix publish
+	hotfix-publish = flow hotfix publish
+	hotfix-end = flow hotfix finish -Fpn
+
+	start = "!gffs() { git flow feature start ${1}; }; gffs"
+	finish = "!gfff() { git flow feature finish -F $(git-flow-current-branch); gfff}"
+	hotfix = "!gfhs() { git flow hotfix start $1; }; gfhs"
+	hotfix-finish = "!gfhf() { git fetch --tags; git pull origin master; git flow hotfix finish -F $(git-flow-current-branch); }; gfhf"
+
+[diff]
+  tool = wstorm
+[difftool]
+  prompt = false
+[difftool.wstorm]
+  cmd = /usr/local/bin/wstorm diff "$LOCAL" "$REMOTE"
+[merge]
+  tool = wstorm
+[mergetool.wstorm]
+  cmd = /usr/local/bin/wstorm merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+
+
+
