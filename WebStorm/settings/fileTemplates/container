@@ -1,0 +1,38 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+
+import {} from './actions';
+
+class $NAME extends Component {
+
+  componentDidMount(){
+    this.props.request${NAME} ();
+  }
+
+  render() {
+    const {    } = this.props;
+        
+    return (
+       
+    );
+  }
+}
+
+${NAME}.propTypes = {
+    
+};
+
+const mapStateToProps = (state) => ({
+   
+});
+
+const mapDispatchToProps = (dispatch) => (
+  bindActionCreators({  }, dispatch)
+);
+
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+  )(${NAME});
