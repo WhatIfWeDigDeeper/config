@@ -1,0 +1,66 @@
+import React from 'react';
+import { Field, reduxForm } from 'redux-form'
+
+import {
+  required,
+  numeric,
+  maxLength,
+  stripNonNumeric,
+  validateRequired
+} from '../../utilities/formValidation';
+import { renderInputText } from '../../utilities/formHelper';
+
+import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
+import { btnShared, btnDefaultStyles } from '../../styles/buttons';
+import { vGreenProgress } from '../../styles/colors';
+import '../../styles/${FORM_NAME}.scss';
+
+const validate = validateRequired([  ]);
+
+const ${FORM_NAME} = (props) => {
+  const {
+    handleSubmit,
+    pristine,
+    submitting,
+    uploadProgress,
+    saveInProgress,
+    add${FORM_NAME}
+  } = props;
+  return (
+    <form className="${FORM_NAME}" onSubmit={handleSubmit(add${FORM_NAME})}>
+
+      <Field
+        id="txt-"
+        name=""
+        type="text"
+        component={renderInputText}
+        label="*"
+        placeholder=""
+        className=""
+        validate={[ required, maxLength(255) ]}
+      />
+
+      <RaisedButton
+        className="mui-raised-btn"
+        label={saveInProgress ? "Saving" : "Save"}
+        style={{...btnShared, ...btnDefaultStyles}}
+        fullWidth={true}
+        children={saveInProgress ? <CircularProgress size={25} thickness={2}
+        color={vGreenProgress}/> : false}
+        type="submit"
+        disabled={pristine || submitting || saveInProgress}
+      />
+
+    </form>
+  );
+};
+
+${FORM_NAME}.propTypes = {
+    
+};
+
+export default (reduxForm({
+  form: '${FORM_NAME}',
+  validate
+})(${FORM_NAME}));
