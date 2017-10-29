@@ -35,13 +35,16 @@ redo-npm(){
   rm -rf node_modules;
   yarn install;
 }
+ls-node-modules(){
+  find . -name node_modules -print
+}
 run-ios(){ open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app; }
 run-android(){ emulator @PixelXL; }
 ls-android(){ emulator -list-avds; }
 help-local(){
   echo 'NETWORK: ipconfig, pid-port, ls-port';
   echo 'MONGO: start-mongo';
-  echo 'NODE: update-node, redo-npm';
+  echo 'NODE: update-node, redo-npm, ls-node-modules';
   echo 'GIT: git-current, git-flow-current-branch';
   echo 'FILES: dir';
   echo 'MOBILE: run-ios, run-android, ls-android';
