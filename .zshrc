@@ -39,6 +39,9 @@ redo-npm(){
 ls-node-modules(){
   find . -name node_modules -print
 }
+del-node-modules(){
+  find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
+}
 fix-npm-token(){ rm -f ./.npmrc; }
 tcp-dump(){ sudo tcpdump -i any; }
 run-ios(){ open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app; }
@@ -49,7 +52,7 @@ rn-android(){ react-native run-android; }
 help-local(){
   echo 'NETWORK: ipconfig, pid-port, ls-port, tcp-dump';
   echo 'MONGO: start-mongo';
-  echo 'NODE: update-node, redo-npm, fix-npm-token, ls-node-modules';
+  echo 'NODE: update-node,redo-npm,fix-npm-token,ls-node-modules,del-node-modules';
   echo 'GIT: git-current, git-flow-current-branch';
   echo 'FILES: dir';
   echo 'MOBILE:run-ios,run-android,ls-android,rn-ios,rn-android';
