@@ -7,37 +7,25 @@
 	editor = atom
 	autocrlf = input
 [alias]
-    # http://haacked.com/archive/2014/07/28/github-flow-aliases/
+    # some from http://haacked.com/archive/2014/07/28/github-flow-aliases/
 	cd = checkout
 	cdd = checkout develop
 	cdm = checkout master
-	ec = config --global -e
-	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
-	cob = checkout -b
-	cm = !git add -A && git commit -m
-	save = !git add -A && git commit -m 'SAVEPOINT'
-	wip = !git add -u && git commit -m "WIP"
+	new = checkout -b
+	newf = !git checkout -b $@ && git branch --set-upstream-to=origin/feature/$@ feature/$@
 	undo = reset --hard origin
 	undom = reset --hard origin/master
-	amend = commit -a --amend
-	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
-	bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
-	bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+	url = ls-remote --get-url
 
 	s = status
 	a = !git add . && git status
-	au = !git add -u . && git status
-	aa = !git add . && git add -u . && git status
 	c = commit
-	ca = commit --amend # careful
-	ac = !git add . && git commit
-	acm = !git add . && git commit -m
+	ac = !git add . && git commit -m
 	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
 	ll = log --stat --abbrev-commit
 	lg = log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	llg = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
 	d = diff
-	master = checkout master
 	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
 
 	cdd = checkout develop
@@ -47,13 +35,10 @@
 	rm = branch -d
 	del-server = !git push origin --delete $@
 	ls = branch
-	ls-tag = describe --tags
 	lsr = branch --remote
 	lst = describe --tags
 	lsrt = ls-remote --tags
 	prune = fetch --prune
-	p = pull
-	f = fetch
 	fp = !git fetch && git pull
 	feature = !git checkout -b $@ && git branch --set-upstream-to=origin/feature/$@ feature/$@
 # https://github.com/nvie/gitflow/wiki/Command-Line-Arguments
