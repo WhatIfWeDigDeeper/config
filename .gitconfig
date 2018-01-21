@@ -7,20 +7,41 @@
 	editor = atom
 	autocrlf = input
 [alias]
-    # some from http://haacked.com/archive/2014/07/28/github-flow-aliases/
+    	# some from http://haacked.com/archive/2014/07/28/github-flow-aliases/
 	cd = checkout
 	cdd = checkout develop
 	cdm = checkout master
 	new = checkout -b
 	newf = !git checkout -b $@ && git branch --set-upstream-to=origin/feature/$@ feature/$@
-	undo = reset --hard origin
-	undom = reset --hard origin/master
-	url = ls-remote --get-url
-
+	fp = !git fetch && git pull
+	
+	# branch & tags
+	ls = branch
+	lsr = branch --remote
+	lst = describe --tags
+	lsrt = ls-remote --tags
+	
+	# modify
 	s = status
 	a = !git add . && git status
-	c = commit
+	c = commit -m
 	ac = !git add . && git commit -m
+	p = push
+	
+	# config
+	url = ls-remote --get-url
+	cfg = config --global -e
+
+	# clean
+	undo = reset --hard origin
+	undom = reset --hard origin/master
+	del = branch -d
+	delete = branch -d
+	rm = branch -d
+	delr = !git push origin --delete $@
+	prune = fetch --prune
+	
+	# logging
 	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
 	ll = log --stat --abbrev-commit
 	lg = log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
@@ -28,20 +49,9 @@
 	d = diff
 	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
 
-	cdd = checkout develop
-	cdm = checkout master
-	del = branch -d
-	delete = branch -d
-	rm = branch -d
-	del-server = !git push origin --delete $@
-	ls = branch
-	lsr = branch --remote
-	lst = describe --tags
-	lsrt = ls-remote --tags
-	prune = fetch --prune
-	fp = !git fetch && git pull
-	feature = !git checkout -b $@ && git branch --set-upstream-to=origin/feature/$@ feature/$@
-# https://github.com/nvie/gitflow/wiki/Command-Line-Arguments
+
+
+	# https://github.com/nvie/gitflow/wiki/Command-Line-Arguments
 	feature-start = !git flow feature start -F $@ && git flow feature publish
 	feature-end = flow feature finish -FDS
 	feature-end-keep = flow feature finish -Frk
@@ -65,14 +75,14 @@
 	hotfix-finish = "!gfhf() { git fetch --tags; git pull origin master; git flow hotfix finish -F $(git-flow-current-branch); }; gfhf"
 
 [diff]
-  tool = wstorm
+  	tool = wstorm
 [difftool]
-  prompt = false
+  	prompt = false
 [difftool.wstorm]
-  cmd = /usr/local/bin/wstorm diff "$LOCAL" "$REMOTE"
+  	cmd = /usr/local/bin/wstorm diff "$LOCAL" "$REMOTE"
 [merge]
-  tool = wstorm
+  	tool = wstorm
 [mergetool.wstorm]
-  cmd = /usr/local/bin/wstorm merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+  	cmd = /usr/local/bin/wstorm merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [push]
-	followTags = true
+  	followTags = true
