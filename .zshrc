@@ -13,6 +13,7 @@ export PATH="$PATH:~/Library/scala-2.12.2/bin"
 export PATH="${PATH}:/Library/Frameworks/Python.framework/Versions/2.7/bin"
 export PATH="${PATH}:/Library/Frameworks/Python.framework/Versions/3.6/bin"
 export PATH="$PATH:/opt/local/bin:/opt/local/sbin"
+export PATH="$PATH:/usr/local/smlnj/bin"
 export EDITOR='atom -nw'
 export PS1="λ "
 
@@ -39,6 +40,7 @@ redo-npm(){
 ls-node-modules(){
   find . -name node_modules -print
 }
+lsnm(){ ls node_modules/.bin; }
 del-node-modules(){
   find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
 }
@@ -113,7 +115,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  git mongodb
 )
 
 source $ZSH/oh-my-zsh.sh

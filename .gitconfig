@@ -7,27 +7,30 @@
 	editor = atom
 	autocrlf = input
 [alias]
-    	# some from http://haacked.com/archive/2014/07/28/github-flow-aliases/
+    # some from http://haacked.com/archive/2014/07/28/github-flow-aliases/
 	cd = checkout
 	cdd = checkout develop
 	cdm = checkout master
 	new = checkout -b
-	newf = !git checkout -b $@ && git branch --set-upstream-to=origin/feature/$@ feature/$@
+	newf = !git checkout -b feature/$@ && git branch --set-upstream-to=origin/feature/$@ feature/$@
 	fp = !git fetch && git pull
-	
+
 	# branch & tags
 	ls = branch
 	lsr = branch --remote
 	lst = describe --tags
 	lsrt = ls-remote --tags
-	
+
 	# modify
 	s = status
 	a = !git add . && git status
-	c = commit -m
-	ac = !git add . && git commit -m
-	p = push
-	
+	cm = commit -m
+	acm = git commit -am
+	up = push
+	get = pull
+	rbi = rebase -i
+	cp = cherry-pick
+
 	# config
 	url = ls-remote --get-url
 	cfg = config --global -e
@@ -40,13 +43,13 @@
 	rm = branch -d
 	delr = !git push origin --delete $@
 	prune = fetch --prune
-	
+
 	# logging
 	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
 	ll = log --stat --abbrev-commit
 	lg = log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	llg = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
-	d = diff
+	df = diff
 	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
 
 
