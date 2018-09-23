@@ -1,0 +1,22 @@
+{
+  // Ctrl + space to trigger.
+  //
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  "TypeScript Sample Code": {
+    "prefix": "ts",
+    "body": ["```typescript", "$1", "```"],
+    "description": "typescript sample"
+  },
+  "OCaml Sample Code": {
+    "prefix": "ocaml",
+    "body": ["```ocaml", "$1", "```"],
+    "description": "ocaml sample code"
+  },
+  "Bash Sample Code": {
+    "prefix": "bash",
+    "body": ["```bash", "$1", "```"],
+    "description": "bash sample code"
+  }
+}
