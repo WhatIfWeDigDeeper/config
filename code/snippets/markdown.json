@@ -1,0 +1,11 @@
+{
+	"readme comments": {
+		"prefix": "xxcode",
+		"body": [
+			"```typescript",
+			"$1",
+			"```"
+		],
+		"description": "typescript code sample"
+	}
+}
