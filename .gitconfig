@@ -4,55 +4,84 @@
 [credential]
 	helper = osxkeychain
 [core]
-	editor = atom
+	editor = atom --wait
 	autocrlf = input
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
     # some from http://haacked.com/archive/2014/07/28/github-flow-aliases/
 	cd = checkout
 	cdd = checkout develop
 	cdm = checkout master
-	new = checkout -b
-	newf = !git checkout -b feature/$@ && git branch --set-upstream-to=origin/feature/$@ feature/$@
+	un = checkout -- # file name
 	fp = !git fetch && git pull
+	s = status -s
+	find = grep -i -n #-c for counts
+  	findf = grep -i -n -S
 
-	# branch & tags
+	# create
+	flow-start = !git flow release start $@ && git flow release publish $@
+	new = checkout -b
+
+	# modify
+	ds = diff --cached
+	a = add
+  	acm = commit -am
+	cm = commit -m
+	ca = commit --amend
+	up = push -u origin
+	rbi = rebase -i # sha before.
+	rbim = rebase -i master
+	wip = commit -am "[WIP]"
+	doc = commit -am "[DOCS] Updated documentation --skip-ci"
+
+	# branch info
 	ls = branch
+	lsf = ls-files
 	lsr = branch --remote
 	lst = describe --tags
 	lsrt = ls-remote --tags
-
-	# modify
-	s = status
-	a = !git add . && git status
-	cm = commit -m
-	acm = git commit -am
-	up = push
-	get = pull
-	rbi = rebase -i
-	cp = cherry-pick
+	url = ls-remote
+	last = branch -v
 
 	# config
-	url = ls-remote --get-url
+	ualias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
 	cfg = config --global -e
 
-	# clean
-	undo = reset --hard origin
-	undom = reset --hard origin/master
+	# cleanup
+	unstage = reset HEAD # file name undo stage only
+  	sub = reset HEAD # file name
+	gundo = checkout HEAD # file name - both stage and wd
+	undo-merge = revert ^M
+	toss = checkout -- # file name - undo wd
+	unmerged = branch --no-merged
+	merged = branch --merged
 	del = branch -d
 	delete = branch -d
-	rm = branch -d
+	DEL = branch -D
 	delr = !git push origin --delete $@
+	nuc = reset --hard origin
+	nucm = reset --hard origin/master
 	prune = fetch --prune
+
+	cp = cherry-pick
+
+	# delete file from staging, but not wd
+	delstg = rm --cached
+	rename = mv
 
 	# logging
 	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	lol = log -p --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
 	ll = log --stat --abbrev-commit
 	lg = log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	llg = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
-	df = diff
-	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+	llg = log --color --graph --pretty=format:'%C(bold white)%h %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
+  	l1 = log --pretty=oneline --abbrev-commit
+	lm = log --oneline --left-right HEAD...MERGE_HEAD
+  	stats = show --stat
 
-
+	# advanced plumbing
+	read-sha = cat-file -p # sha1
+	gcount = count-objects
 
 	# https://github.com/nvie/gitflow/wiki/Command-Line-Arguments
 	feature-start = !git flow feature start -F $@ && git flow feature publish
@@ -89,3 +118,19 @@
   	cmd = /usr/local/bin/wstorm merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [push]
   	followTags = true
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[rerere]
+	enabled = true
