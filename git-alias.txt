@@ -1,12 +1,3 @@
-[user]
-	email = YOUR-EMAIL-HERE
-	name = YOUR-NAME-HERE
-[credential]
-	helper = osxkeychain
-[core]
-	editor = code --wait
-	autocrlf = input
-	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
 	# first install git-extras https://github.com/tj/git-extras
   	# some aliases from http://haacked.com/archive/2014/07/28/github-flow-aliases/
@@ -123,30 +114,3 @@
 	finish = "!gfff() { git flow feature finish -F $(git-flow-current-branch); gfff}"
 	hotfix = "!gfhs() { git flow hotfix start $1; }; gfhs"
 	hotfix-finish = "!gfhf() { git fetch --tags; git pull origin master; git flow hotfix finish -F $(git-flow-current-branch); }; gfhf"
-
-[diff]
-  tool = code
-[difftool.code]
-  cmd = code --wait --diff "$LOCAL" "$REMOTE"
-[merge]
-  tool = code
-[mergetool.code]
-  cmd = code --wait "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
-[push]
-	followTags = true
-[color]
-	ui = true
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[color "diff"]
-	meta = yellow
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-[rerere]
-	enabled = true

@@ -1,2 +1,6 @@
-# WebStorm
-.idea
+# Mac search
+.DS_Store
+
+# Node
+npm-debug.log
+.v8flags.*
