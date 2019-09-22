@@ -1,0 +1,242 @@
+{
+  "Ignore TSLint rule for console": {
+    "scope": "typescript,typescriptreact,javascript",
+    "prefix": "xxlog",
+    "body": ["// tslint:disable-next-line no-console", "console.log(`$0`);"],
+    "description": "Ignore no conosle tslint rule for next line"
+  },
+  "Ignore TSLint rule for debugger": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxignoredebug",
+    "body": ["// tslint:disable-next-line no-debugger", "debugger;"],
+    "description": "Ignore no debugger tslint rule for next line"
+  },
+  "Ignore ts rule": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxtsi",
+    "body": ["// @ts-ignore"],
+    "description": "Ignore tsc rule for next line"
+  },
+  "todo": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxtodo",
+    "body": ["// todo: $1"],
+    "description": "todo"
+  },
+  "import": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xximp",
+    "body": ["import { $2 } from '$1';"],
+    "description": "import statement"
+  },
+  "describe unit test container": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "xxdesc",
+    "body": [
+      "describe('$1', () => {",
+      "    it('$2', () => {",
+      "        $3",
+      "    });",
+      "});"
+    ],
+    "description": "describe test container"
+  },
+  "describe.each unit test": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "xxdescEach",
+    "body": [
+      "describe.each([$3])('when $1 = \"%s\"', (val: string) => {",
+      "    it(`should return ${2}`, () => {",
+      "         ",
+      "         expect().toEqual(val);",
+      "    })",
+      "});"
+    ],
+    "description": "describe.each unit test"
+  },
+  "it unit test": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "xxit",
+    "body": [
+      "it('$1', () => {",
+      "    $2",
+      "    expect($3).toEqual($4);",
+      "});"
+    ],
+    "description": "it unit test"
+  },
+  "it async test": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "xxint",
+    "body": [
+      "it('$1', async () => {",
+      "    $2",
+      "    expect($3).toEqual($4);",
+      "});"
+    ],
+    "description": "int integration test"
+  },
+  "it.each unit test": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "xxiteach",
+    "body": [
+      "it.each([$3])(",
+      "    'should $1 %s',",
+      "    ($2: string) => {",
+      "        expect().toEqual($2);",
+      "    }",
+      ");"
+    ],
+    "description": "it.each unit test"
+  },
+  "expect toEqual": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "xxeq",
+    "body": ["expect($1).toEqual($2);"],
+    "description": "expect toEqual test"
+  },
+  "unit test expect to throw": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "xxjestthrow",
+    "body": [
+      "expect($1).toThrowError('$2');"
+    ],
+    "description": "expect unit test to throw error with message"
+  },
+  "async unit test expect to throw": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "xxjestasyncthrow",
+    "body": [
+      "await expect($1).rejects.toThrowError('$2');"
+    ],
+    "description": "expect async unit test to throw error with message"
+  },
+  "promise all with exception handling": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "xxpromiseAll",
+    "body": [
+      "const results = await Promise.all(promises.map(p => p.catch(e => e)));",
+      "const validResults = results.filter(result => !(result instanceof Error));"
+    ],
+    "description": "promise all exceptions, https://stackoverflow.com/a/46024590/753279"
+  },
+  "faker-random-boolean": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxfb",
+    "body": ["faker.random.boolean(),"],
+    "description": "faker random boolean"
+  },
+  "faker-random-number": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxfn",
+    "body": ["faker.random.number({ min: 0, max: 99}),"],
+    "description": "faker random number"
+  },
+  "faker-random-word": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxfw",
+    "body": ["faker.random.word(),"],
+    "description": "faker random word"
+  },
+  "faker-internet-url": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxfurl",
+    "body": ["faker.internet.url(),"],
+    "description": "faker internet url"
+  },
+  "build fixture": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxbf",
+    "body": [
+      "export const build$1Json = (overrides?: any): any => {",
+      "    const json$1 = {",
+      "        ",
+      "    };",
+      "    return overrides ? { ...json$1, ...overrides } : json$1;",
+      "}",
+      "",
+      "export const build$1View = (overrides?: Partial<$1ViewModel>): $1ViewModel => {",
+      "    const defaultData: $1ViewModel = {",
+      "        ",
+      "    };",
+      "    return Factory.Sync.makeFactory<$1ViewModel>(defaultData).build(overrides);",
+      "}",
+      "",
+      "export const build$1Domain = (overrides?: Partial<$1DomainModel>): $1DomainModel => {",
+      "    const defaultData: $1DomainModel = {",
+      "        ",
+      "    };",
+      "    return Factory.Sync.makeFactory<$1DomainModel>(defaultData).build(overrides);",
+      "}"
+    ],
+    "description": "build fixtures"
+  },
+  "build json fixture": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxbj",
+    "body": [
+      "export const build$1Json = (overrides?: any): any => {",
+      "    const json$1 = {",
+      "        ",
+      "    };",
+      "    return overrides ? { ...json$1, ...overrides } : json$1;",
+      "}"
+    ],
+    "description": "build json fixture"
+  },
+  "build view fixture": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxbv",
+    "body": [
+      "export const build$1View = (overrides?: Partial<$1ViewModel>): $1ViewModel => {",
+      "    const defaultData: $1ViewModel = {",
+      "        ...getCommonEntityView(),",
+      "        {",
+      "            ",
+      "        }",
+      "    };",
+      "    return Factory.Sync.makeFactory<$1ViewModel>(defaultData).build(overrides);",
+      "};"
+    ],
+    "description": "build view fixture"
+  },
+  "build domain fixture": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxbdf",
+    "body": [
+      "export const build$1Domain = (overrides?: Partial<$1DomainModel>): $1DomainModel => {",
+      "        const defaultData: $1DomainModel = {",
+      "        ...getCommonEntityDomain(),",
+      "        {",
+      "            ",
+      "        }",
+      "    };",
+      "    return Factory.Sync.makeFactory<$1DomainModel>(defaultData).build(overrides);",
+      "};"
+    ],
+    "description": "build domain factory fixture"
+  },
+  "build domain factory builder": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxbd",
+    "body": [
+      "export const build$1Domain = (overrides?: Partial<$1DomainModel>): $1DomainModel => {",
+      "    const defaultData: $1DomainModel = {",
+      "        ...getCommonEntityDomain(),",
+      "        {",
+      "            ",
+      "        }",
+      "    };",
+      "    const domain$1: $1DomainModel = { ...json$1, ...overrides };",
+      "    return plainToClass($1DomainModel, domain$1 as $1DomainModel);",
+      "};"
+    ],
+    "description": "build domain fixture"
+  },
+  "get common builder": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "xxgb",
+    "body": ["export const getCommon$1 = (): any => ({", "        ", "});"],
+    "description": "get build fixture"
+  }
+}
